@@ -1,0 +1,20 @@
+//Reverse a C-Style String(with null at the end) without using any additional datatype
+
+import Foundation
+
+var keyboard = NSFileHandle.fileHandleWithStandardInput()
+print("Enter input string")
+var inputData = keyboard.availableData
+var str = NSString(data: inputData, encoding: NSUTF8StringEncoding) as! String
+var charArray = Array(str.characters)
+var i = 0
+var j = charArray.count-1
+while i<j {
+    var temp = charArray[i]
+    charArray[i] = charArray[j]
+    charArray[j] = temp
+    i += 1
+    j -= 1
+}
+str = String(charArray)
+print(str)
