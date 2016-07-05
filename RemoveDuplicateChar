@@ -1,0 +1,38 @@
+// Remove duplicate character from a string 
+
+import Foundation
+
+var keyboard = NSFileHandle.fileHandleWithStandardInput()
+print("Enter input String")
+var inputData = keyboard.availableData
+var str = NSString(data: inputData, encoding: NSUTF8StringEncoding) as! String
+if !str.isEmpty && str != "\n" {
+    var charArray = Array(str.characters)
+    charArray.removeLast()
+    var asciiArray : [UInt8] = Array(str.utf8)
+    asciiArray.removeLast()
+    var i = 0
+    var j = charArray.count - 1
+    var boolArray:[Bool?] = [Bool?](count: 256, repeatedValue: false)
+    var tail = 1
+    var repeatIndex = charArray.count
+    boolArray[Int(asciiArray[0])] = true
+    
+    for index in 1...j {
+        if boolArray[Int(asciiArray[index])] == false {
+            charArray[tail] = charArray[index]
+            tail += 1
+            boolArray[Int(asciiArray[index])] = true
+        } else {
+            repeatIndex -= 1
+        }
+    }
+    if repeatIndex != charArray.count{
+        for index in repeatIndex...charArray.count-1{
+            charArray.removeLast()
+        }
+    }
+    
+    str = String(charArray)
+    print(str)
+}
