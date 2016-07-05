@@ -1,0 +1,28 @@
+// If a string has all unique characters
+
+import Foundation
+
+var keyboard = NSFileHandle.fileHandleWithStandardInput()
+var inputData = keyboard.availableData
+var str:String = NSString(data: inputData, encoding: NSUTF8StringEncoding) as! String
+var charArray = Array(str.characters)
+var i = 0
+var j = charArray.count - 2
+var asciiArray : [UInt8] = Array(str.utf8)
+print(asciiArray)
+print(charArray)
+
+//var boolArray :[Bool]
+var boolArray:[Bool?] = [Bool?](count: 256, repeatedValue: false)
+
+for index in i...j {
+    if (boolArray[Int(asciiArray[index])] == false) {
+        boolArray[Int(asciiArray[index])] = true
+        if index == j {
+            print("Ouch! All unique")
+
+        }
+    } else {
+        print("Not all unique!")
+    }
+}
